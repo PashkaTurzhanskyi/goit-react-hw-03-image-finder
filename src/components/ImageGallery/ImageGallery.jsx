@@ -1,8 +1,9 @@
 import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
 import React from 'react';
+import css from './ImageGallery.module.css';
 
 export const ImageGallery = ({ images, onChoseImage }) => (
-  <ul className="gallery">
+  <ul className={css.ImageGallery}>
     {images.map(image => (
       <ImageGalleryItem
         key={image.id}

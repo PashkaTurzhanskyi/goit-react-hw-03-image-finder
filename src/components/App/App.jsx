@@ -1,16 +1,17 @@
 import React from 'react';
-import { Searchbar } from './Searchbar/Searchbar';
-import { ImageGallery } from './ImageGallery/ImageGallery';
-import { Loader } from './Loader/Loader';
-import { Button } from './Button/Button';
-import { Modal } from './Modal/Modal';
+import { Searchbar } from '../Searchbar/Searchbar';
+import { ImageGallery } from '../ImageGallery/ImageGallery';
+import { Loader } from '../Loader/Loader';
+import { Button } from '../Button/Button';
+import { Modal } from '../Modal/Modal';
+import css from './App.module.css';
 
 const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = '34756481-ec8746fc3857b8c268e985924';
 const searchParams = new URLSearchParams({
   image_type: 'photo',
   orientation: 'horizontal',
-  per_page: 3,
+  per_page: 12,
 });
 
 export class App extends React.Component {
@@ -41,7 +42,6 @@ export class App extends React.Component {
           );
         })
         .then(images => {
-          console.log(images);
           this.setState(prevState => ({
             images: [...prevState.images, ...images.hits],
           }));
@@ -51,9 +51,9 @@ export class App extends React.Component {
     }
   }
 
-  // toggleModal = () => {
-  //   this.setState(({ showModal }) => ({ showModal: !showModal }));
-  // };
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({ showModal: !showModal }));
+  };
 
   formSubmitHandler = value => {
     if (this.state.searchQuery !== value) {
@@ -64,26 +64,21 @@ export class App extends React.Component {
   };
 
   onPageChange = () => {
-    console.log('load more');
     this.setState(prevState => ({ page: prevState.page + 1 }));
   };
 
   onChoseImage = large => {
-    console.log(large);
     this.setState({ imageModal: large });
-    this.setState(({ showModal }) => ({ showModal: !showModal }));
+    this.toggleModal();
   };
 
   render() {
     return (
-      <div>
+      <div className={css.App}>
         <Searchbar onSubmit={this.formSubmitHandler} />
         {this.state.error && (
           <h1>There is no results for {this.state.searchQuery}</h1>
         )}
-        {/* {this.state.images && this.state.images.length === 0 && (
-          <h1>There is no results for {this.state.searchQuery}</h1>
-        )} */}
         {this.state.loading && <Loader />}
         {this.state.images && (
           <ImageGallery
@@ -94,7 +89,12 @@ export class App extends React.Component {
         {this.state.images.length !== 0 && !this.state.loading && (
           <Button onPageChange={this.onPageChange} />
         )}
-        {this.state.showModal && <Modal largeImage={this.state.imageModal} />}
+        {this.state.showModal && (
+          <Modal
+            largeImage={this.state.imageModal}
+            onClose={this.toggleModal}
+          />
+        )}
       </div>
     );
   }
