@@ -73,27 +73,27 @@ export class App extends React.Component {
   };
 
   render() {
+    const { error, searchQuery, loading, images, showModal, imageModal } =
+      this.state;
+
     return (
       <div className={css.App}>
         <Searchbar onSubmit={this.formSubmitHandler} />
-        {this.state.error && (
-          <h1>There is no results for {this.state.searchQuery}</h1>
+
+        {error && <h1>There is no results for {searchQuery}</h1>}
+
+        {loading && <Loader />}
+
+        {images && (
+          <ImageGallery images={images} onChoseImage={this.onChoseImage} />
         )}
-        {this.state.loading && <Loader />}
-        {this.state.images && (
-          <ImageGallery
-            images={this.state.images}
-            onChoseImage={this.onChoseImage}
-          />
-        )}
-        {this.state.images.length !== 0 && !this.state.loading && (
+
+        {this.state.images.length !== 0 && !loading && (
           <Button onPageChange={this.onPageChange} />
         )}
-        {this.state.showModal && (
-          <Modal
-            largeImage={this.state.imageModal}
-            onClose={this.toggleModal}
-          />
+
+        {showModal && (
+          <Modal largeImage={imageModal} onClose={this.toggleModal} />
         )}
       </div>
     );
