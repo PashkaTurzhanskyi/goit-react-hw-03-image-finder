@@ -88,7 +88,7 @@ export class App extends React.Component {
           <ImageGallery images={images} onChoseImage={this.onChoseImage} />
         )}
 
-        {this.state.images.length !== 0 && !loading && (
+        {images.length !== 0 && !loading && (
           <Button onPageChange={this.onPageChange} />
         )}
 
