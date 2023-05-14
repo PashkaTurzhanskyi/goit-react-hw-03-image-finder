@@ -19,7 +19,7 @@ export const ImageGallery = ({ images, onChoseImage }) => (
 ImageGallery.propTypes = {
   images: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
     })
   ),
   onChoseImage: PropTypes.func.isRequired,
