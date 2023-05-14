@@ -1,5 +1,6 @@
 import React from 'react';
 import css from './ImageGalleryItem.module.css';
+import PropTypes from 'prop-types';
 
 export const ImageGalleryItem = ({ small, large, onChoseImage }) => (
   <li className={css.ImageGalleryItem}>
@@ -11,3 +12,9 @@ export const ImageGalleryItem = ({ small, large, onChoseImage }) => (
     />
   </li>
 );
+
+ImageGalleryItem.propTypes = {
+  small: PropTypes.string.isRequired,
+  large: PropTypes.string.isRequired,
+  onChoseImage: PropTypes.func.isRequired,
+};

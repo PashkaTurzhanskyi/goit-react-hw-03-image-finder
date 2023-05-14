@@ -1,6 +1,7 @@
 import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
 import React from 'react';
 import css from './ImageGallery.module.css';
+import PropTypes from 'prop-types';
 
 export const ImageGallery = ({ images, onChoseImage }) => (
   <ul className={css.ImageGallery}>
@@ -14,3 +15,12 @@ export const ImageGallery = ({ images, onChoseImage }) => (
     ))}
   </ul>
 );
+
+ImageGallery.propTypes = {
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    })
+  ),
+  onChoseImage: PropTypes.func.isRequired,
+};
