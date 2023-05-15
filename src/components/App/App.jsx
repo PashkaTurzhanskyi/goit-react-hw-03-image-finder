@@ -59,7 +59,10 @@ export class App extends React.Component {
     if (this.state.searchQuery !== value) {
       this.setState({ images: [], searchQuery: value, page: 1 });
     } else {
-      this.setState({ images: [], searchQuery: '' });
+      // this.setState({ images: [], searchQuery: '' });
+      alert(
+        `You are already viewing the results on request "${this.state.searchQuery}"`
+      );
     }
   };
 

@@ -17,7 +17,7 @@ export class Searchbar extends React.Component {
       alert('Please enter a search query!');
     } else {
       this.props.onSubmit(this.state.value);
-      this.setState({ value: '' });
+      // this.setState({ value: '' });
     }
   };
 
